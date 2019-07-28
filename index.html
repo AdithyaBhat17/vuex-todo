@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Todo</title>
+        
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 style="text-align: center; font-weight: 'bold'">Todo App</h1>
+            <div id="app">
+            </div>
+        </div>
+        <template id="todo-list">
+            <ul class="tasks">
+                <li
+                    v-for="todo in todos"
+                    :class="{completed: todo.completed}" 
+                    class="task"
+                    :key="todo.id"
+                    @click="toggleTodo(todo.id)"
+                    @dblclick="deleteTodo(todo.id)"
+                >
+                {{todo.task}}
+                </li>
+            </ul>
+        </template>
+        <template id="app-template">
+            <div>
+                <form @submit.prevent="addTodo" class="form">
+                    <input type="text" placeholder="Enter new task" v-model="task" required class="todo-input">
+                </form>
+                <todo-list :todos="todos"></todo-list>
+            </div>
+        </template>         
+
+        <script src="https://unpkg.com/vue@2.5.3/dist/vue.min.js"></script>
+        <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.min.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
